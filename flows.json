@@ -1,0 +1,165 @@
+[
+    {
+        "id": "f6f2187d.f17ca8",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "99fac56fbf6b6b4f",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "10.1.7.16",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "3cc11d24.ff01a2",
+        "type": "comment",
+        "z": "f6f2187d.f17ca8",
+        "name": "WARNING: please check you have started this container with a volume that is mounted to /data\\n otherwise any flow changes are lost when you redeploy or upgrade the container\\n (e.g. upgrade to a more recent node-red docker image).\\n  If you are using named volumes you can ignore this warning.\\n Double click or see info side panel to learn how to start Node-RED in Docker to save your work",
+        "info": "\nTo start docker with a bind mount volume (-v option), for example:\n\n```\ndocker run -it -p 1880:1880 -v /home/user/node_red_data:/data --name mynodered nodered/node-red\n```\n\nwhere `/home/user/node_red_data` is a directory on your host machine where you want to store your flows.\n\nIf you do not do this then you can experiment and redploy flows, but if you restart or upgrade the container the flows will be disconnected and lost. \n\nThey will still exist in a hidden data volume, which can be recovered using standard docker techniques, but that is much more complex than just starting with a named volume as described above.",
+        "x": 350,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "5bcf9d135605b5ec",
+        "type": "kbus in",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "topic": "PFC200",
+        "qos": "0",
+        "broker": "99fac56fbf6b6b4f",
+        "ignoreempty": true,
+        "removemqttconfig": false,
+        "x": 200,
+        "y": 320,
+        "wires": [
+            [],
+            [
+                "398e463b6906a9ae"
+            ]
+        ]
+    },
+    {
+        "id": "a11c3f67f034decd",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 250,
+        "y": 220,
+        "wires": [
+            [
+                "759b57da83995911"
+            ]
+        ]
+    },
+    {
+        "id": "bfaea1e90a3a9565",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 250,
+        "y": 260,
+        "wires": [
+            [
+                "759b57da83995911"
+            ]
+        ]
+    },
+    {
+        "id": "759b57da83995911",
+        "type": "digital output",
+        "z": "f6f2187d.f17ca8",
+        "module": "3",
+        "channel": "1",
+        "name": "",
+        "x": 510,
+        "y": 200,
+        "wires": [
+            [
+                "65bdf0b30e19a61e"
+            ]
+        ]
+    },
+    {
+        "id": "65bdf0b30e19a61e",
+        "type": "kbus out",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "topic": "PFC200",
+        "qos": "0",
+        "broker": "99fac56fbf6b6b4f",
+        "ignoreempty": true,
+        "removemqttconfig": false,
+        "x": 680,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "398e463b6906a9ae",
+        "type": "digital input",
+        "z": "f6f2187d.f17ca8",
+        "module": "2",
+        "channel": "2",
+        "name": "",
+        "x": 450,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    }
+]
