@@ -146,7 +146,7 @@
         "ignoreempty": true,
         "removemqttconfig": false,
         "x": 680,
-        "y": 320,
+        "y": 300,
         "wires": []
     },
     {
